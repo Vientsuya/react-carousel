@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ImageCarousel() {
-  const [currentImageUrl, setCurrentImageUrl] = useState("./assets/react.svg");
+  const [currentImageUrl, setCurrentImageUrl] = useState("");
+
+  useEffect(() => {
+    const images = fetch(" https://picsum.photos/v2/list?limit=5")
+      .then((res) => res.json())
+      .then((images) => setCurrentImageUrl(images[0].download_url));
+  }, []);
 
   return (
     <div className="w-[32rem] h-[20rem]">
